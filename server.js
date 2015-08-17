@@ -3,6 +3,28 @@ var Hapi = require('hapi');
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
 
+server.register([
+    {
+        register: require('hapi-bookshelf-models'),
+        options: {
+            knex: {
+                client: 'pg',
+                connection: {
+                    host: 'localhost',
+                    user: 'maia',
+                    password: 'password',
+                    database: 'maia',
+                    port: 5432
+                }
+            },
+            plugins: ['registry'],
+            models: './models/'
+        }
+    }
+], function(err) {
+    // TODO: handle errors
+});
+
 server.route({
     method: 'GET',
     path: '/',
