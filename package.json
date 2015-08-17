@@ -1,0 +1,26 @@
+{
+  "name": "hapi-api-template",
+  "version": "0.0.0",
+  "description": "Hapi Hapy, you know the rest",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/synapsestudios/hapi-api-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/synapsestudios/hapi-api-template/issues"
+  },
+  "homepage": "https://github.com/synapsestudios/hapi-api-template#readme",
+  "dependencies": {
+    "hapi": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.4.1"
+  }
+}
