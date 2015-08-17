@@ -27,6 +27,19 @@ server.register([
 
 server.route({
     method: 'GET',
+    path: '/things',
+    handler: function(request, reply) {
+        var Thing = server.plugins.bookshelf.model('Thing');
+        Thing.fetchAll().then(function(things) {
+            reply(things.toJSON());
+        }).catch(function(err) {
+            // TODO: Handle error
+        });
+    }
+});
+
+server.route({
+    method: 'GET',
     path: '/',
     handler: function (request, reply) {
         reply('Hello, world!');
