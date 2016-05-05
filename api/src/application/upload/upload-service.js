@@ -6,6 +6,8 @@ var temporaryFolder = require('os').tmpdir();
 module.exports = () => {
     var error;
 
+    var chunkPrefix = '';
+
     var cleanIdentifier = identifier => {
         return identifier.replace(/^0-9A-Za-z_-/img, '');
     };
@@ -14,7 +16,7 @@ module.exports = () => {
         // Clean up the identifier
         identifier = cleanIdentifier(identifier);
         // What would the file name be?
-        return path.join(temporaryFolder, './resumable-'+identifier+'.'+chunkNumber);
+        return path.join(temporaryFolder, `./${chunkPrefix}resumable-${identifier}.${chunkNumber}`);
     };
 
     var validateRequest = (chunkNumber, chunkSize, totalSize, identifier, filename, fileSize) => {
@@ -22,7 +24,7 @@ module.exports = () => {
         identifier = cleanIdentifier(identifier);
 
         // Check if the request is sane
-        if (chunkNumber==0 || chunkSize==0 || totalSize==0 || identifier.length==0 || filename.length==0) {
+        if (chunkNumber == 0 || chunkSize == 0 || totalSize == 0 || identifier.length == 0 || filename.length == 0) {
             error = 'non_resumable_request';
             return false;
         }
@@ -33,14 +35,14 @@ module.exports = () => {
             return false;
         }
 
-        if (typeof(fileSize)!='undefined') {
-            if (chunkNumber<numberOfChunks && fileSize!=chunkSize) {
+        if (typeof(fileSize) !== 'undefined') {
+            if (chunkNumber < numberOfChunks && fileSize != chunkSize) {
                 error = `The chunk in the POST request isn't the correct size`;
             }
-            if (numberOfChunks>1 && chunkNumber==numberOfChunks && fileSize!=((totalSize%chunkSize)+chunkSize)) {
+            if (numberOfChunks > 1 && chunkNumber == numberOfChunks && fileSize != ((totalSize%chunkSize) + chunkSize)) {
                 error = `The chunks in the POST is the last one, and the file is not the correct size`;
             }
-            if (numberOfChunks==1 && fileSize!=totalSize) {
+            if (numberOfChunks == 1 && fileSize != totalSize) {
                 error = `The file is only a single chunk, and the data size does not fit`;
             }
             return false;
@@ -52,6 +54,11 @@ module.exports = () => {
     return {
         getError() {
             return error;
+        },
+
+        // Set filename prefix for uploaded chunks. Use to reduce likelyhood of collisions.
+        setChunkPrefix(prefix) {
+            chunkPrefix = prefix;
         },
 
         // Check if chunk already exists
@@ -114,11 +121,11 @@ module.exports = () => {
                 return fs.rename(file.path, chunkFilename).then(() => {
                     // Do we have all the chunks?
                     var currentTestChunk = 1;
-                    var numberOfChunks = Math.max(Math.floor(totalSize/(chunkSize*1.0)), 1);
+                    var numberOfChunks = Math.max(Math.floor(totalSize / (chunkSize*1.0)), 1);
                     var testChunkExists = function() {
                         return fs.exists(getChunkFilename(currentTestChunk, identifier)).then(exists => {
                             if (exists) {
-                                currentTestChunk++;
+                                currentTestChunk += 1;
                                 if (currentTestChunk>numberOfChunks) {
                                     resolve({
                                         complete: true,
