@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "drop-tables": "./src/bin/drop-tables.js",
+    "rebuild-db": "npm run drop-tables && knex migrate:latest && knex seed:run"
   },
   "repository": {
     "type": "git",
@@ -18,9 +19,17 @@
   },
   "homepage": "https://github.com/synapsestudios/hapi-api-template#readme",
   "dependencies": {
-    "hapi": "^9.0.2",
-    "hapi-bookshelf-models": "^1.3.1",
-    "pg": "^4.4.1"
+    "bookshelf": "^0.9.4",
+    "confidence": "^3.0.0",
+    "electrolyte": "^0.2.2",
+    "glue": "^3.2.0",
+    "handlebars": "^4.0.5",
+    "hapi": "^13.3.0",
+    "hapi-auth-jwt2": "^6.0.0",
+    "hapi-email-kue": "^0.3.0",
+    "knex": "^0.10.0",
+    "pg": "^4.4.1",
+    "vision": "^4.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.4.1"
