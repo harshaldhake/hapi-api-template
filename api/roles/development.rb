@@ -43,7 +43,6 @@ run_list(
     "recipe[server_deploy::nginx]",         #installs nginx
     "recipe[server_deploy::nodejs]",
     "recipe[app_deploy::npm_install]",
-    "recipe[server_deploy::node-start]",    #starts node using supervisor
     "recipe[synapse::webserver]",
     "recipe[synapse::apt_packages]",
     "recipe[synapse::knex_migrations]",     #runs knex migrations (node app)
