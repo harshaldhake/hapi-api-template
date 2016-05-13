@@ -36,9 +36,6 @@ var config = {
         },
     },
     'development' : {
-        rollbar : {
-            enabled : false
-        },
         email : {
             rfqRecipient : process.env.DEVELOPER_NAME + '+' + process.env.APP_NAME + '@' + process.env.DEV_DOMAIN,
             driverConfig : {
