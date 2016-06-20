@@ -1,3 +1,0 @@
-[submodule "api/cookbooks"]
-	path = api/cookbooks
-	url = git@github.com:synapsestudios/cookbooks.git
