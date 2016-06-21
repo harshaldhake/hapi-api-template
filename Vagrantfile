@@ -99,7 +99,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.provision 'chef_solo' do |chef|
       chef.roles_path     = './api/roles'
-      chef.cookbooks_path = ['./api/cookbooks', './api/app-cookbooks']
+      chef.cookbooks_path = ['./api/cookbooks']
       chef.add_role 'development'
 
       chef.json = {
