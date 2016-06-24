@@ -12,9 +12,9 @@ module.exports = (bookshelf, ValidationError) => {
                 query.fetch()
                     .then(model => {
                         if (! model) {
-                            reject(new ValidationError(message || 'Row does not exist', 'rowNotExists'));
-                        } else {
                             resolve(value);
+                        } else {
+                            reject(new ValidationError(message || 'Row exists', 'rowNotExists'));
                         }
                     }
                 ).catch((err) => {
