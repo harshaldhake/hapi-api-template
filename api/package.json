@@ -20,6 +20,7 @@
   "homepage": "https://github.com/synapsestudios/hapi-api-template#readme",
   "dependencies": {
     "bookshelf": "^0.9.4",
+    "boom": "^3.2.2",
     "confidence": "^3.0.0",
     "electrolyte": "^0.2.2",
     "glue": "^3.2.0",

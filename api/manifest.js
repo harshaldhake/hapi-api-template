@@ -1,4 +1,5 @@
 var config = require('./config');
+var Boom = require('boom');
 
 module.exports = {
     server : {
@@ -7,6 +8,9 @@ module.exports = {
                 validate: {
                     options: { abortEarly: false },
                     failAction: (request, reply, source, error) => {
+                        if (! error.data.details) {
+                            return reply(Boom.badImplementation(error));
+                        }
                         error.output.payload.validationErrors = error.data.details.map(failure => ({
                             message    : failure.message,
                             type       : failure.type,
