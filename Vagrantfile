@@ -36,8 +36,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #  config.omnibus.chef_version = 'latest'
   #end
 
-  if File.exists?('../syn-vagrant-' + app_name + '.sh')
-    config.vm.provision 'shell', path: '../syn-vagrant' + app_name + '.sh', args: "#{environment} #{app_name}"
+  if File.file?('../syn-vagrant-' + app_name + '.sh')
+    config.vm.provision 'shell', path: '../syn-vagrant-' + app_name + '.sh', args: "#{environment} #{app_name}"
   end
 
   config.vm.provision 'shell', path: './api/syn-vagrant.sh', args: "#{environment} #{app_name}"
