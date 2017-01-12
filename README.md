@@ -2,10 +2,10 @@
 Template used by Synapse Studios, LLC to make hapi rest apis.
 
 ## Installation
-1. `./initialize.sh`
-1. `git add -A`
-1. `git commit -m "Initial commit"`
-1. `git push -u origin master`
+These instructions depend on `docker` and `docker-compose` being intsalled on our system.
+
+1. Copy this project into your repo (without the .git dir)
+2. Run `docker-compose up`
 
 ## Usage
 Hapi is a simple framework that does a lot of stuff right. We try not to get in its way. Most usage details should be found in the hapi docs.
