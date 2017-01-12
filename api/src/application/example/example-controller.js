@@ -1,4 +1,4 @@
-module.exports = (server, enqueueEmail) => {
+module.exports = (server) => {
     return {
         get : (request, reply) => {
             reply('example get request succeeded');

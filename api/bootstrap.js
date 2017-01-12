@@ -28,7 +28,15 @@ exports.register = (server, options, next) => {
         }
     });
 
-    server.route(ioc.create('example/example-routes'));
+    Promise.all([
+        ioc.create('example/example-routes')
+    ])
+    .then(routeArrays => {
+        routeArrays.forEach(routes => {
+            server.route(routes);
+        })
+    })
+    .catch(e => console.error(e));
 
     next();
 };
