@@ -15,11 +15,11 @@ var config = {
     '$filter' : 'env',
     '$base'   : {
         dbConnection : {
-            host     : process.env.DB_HOST,
-            user     : process.env.DB_USER,
-            password : process.env.DB_PASS,
-            database : process.env.DB_NAME,
-            port     : process.env.DB_PORT
+            host: process.env.POSTGRES_HOST,
+            user: process.env.POSTGRES_USER,
+            password: process.env.POSTGRES_PASSWORD,
+            database: process.env.POSTGRES_DB,
+            port: process.env.POSTGRES_PORT,
         },
         auth : {
             secret : process.env.JWT_SECRET

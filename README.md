@@ -1,17 +1,15 @@
 # Hapi Api Template
 Template used by Synapse Studios, LLC to make hapi rest apis.
 
-## Installation
-1. `./initialize.sh`
-1. `git add -A`
-1. `git commit -m "Initial commit"`
-1. `git push -u origin master`
-
 ## Usage
 Hapi is a simple framework that does a lot of stuff right. We try not to get in its way. Most usage details should be found in the hapi docs.
 
 We use [bookshelf] (http://bookshelfjs.org/) and [knex] (http://knexjs.org/) for database stuff.
 We use [electrolyte] (https://github.com/jaredhanson/electrolyte) for IOC.
+
+### Docker
+
+This template comes with docker files for running the api, as well as a commented example-frontend in the `docker-compose.yml` file. In order to run the api you must have `docker` and `docker-compose` installed on your system, then you can simply run `docker-compose up` to run everything.
 
 ### Validation
 We validate our inputs using hapi's built in api validation which can be found documented [here] (http://hapijs.com/tutorials/validation). Hapi uses a validation library called [Joi] (https://github.com/hapijs/joi). The authors of Joi have decided to not provide hooks for custom validators nor to provide the ability for custom messages for validation errors so we have set up a couple standards for how we handle custom validation and client side messaging.
