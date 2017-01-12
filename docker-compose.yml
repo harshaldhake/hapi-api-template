@@ -18,7 +18,6 @@ services:
             # - api
         # command: ["npm", "start"]
     api:
-        image: template-api
         build:
             context: .
             dockerfile: Dockerfile.node
@@ -59,7 +58,6 @@ services:
     redis:
         image: redis
     migrate-seed:
-        image: template-api
         build:
             context: .
             dockerfile: Dockerfile.node
