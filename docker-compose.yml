@@ -1,74 +1,74 @@
 version: '2'
 services:
-    # example-frontend:
-        # build:
-            # context: .
-            # dockerfile: Dockerfile.node
-            # args:
-                # PACKAGE_PATH: ./admin-frontend/package.json
-                # WORKING_DIR: /src/admin-frontend
-        # environment:
-            # BACKEND: api:9000
-            # NODE_PATH: /src/admin-frontend/src
-        # env_file:
-            # - ./common.env
-        # volumes:
-            # - .:/src
-        # depends_on:
-            # - api
-        # command: ["npm", "start"]
-    api:
-        build:
-            context: .
-            dockerfile: Dockerfile.node
-            args:
-                PACKAGE_PATH: ./api/package.json
-                WORKING_DIR: /src/api
-        env_file:
-            - ./common.env
-        volumes:
-            - .:/src
-        depends_on:
-            - postgres
-            - redis
-            - migrate-seed
-        entrypoint: ./wait-for-it.sh -t 0 postgres:5432 --
-        command: ["npm", "start"]
-    # email-queue:
-        # image: template-api
-        # build:
-            # context: .
-            # dockerfile: Dockerfile.node
-            # args:
-                # PACKAGE_PATH: ./api/package.json
-                # WORKING_DIR: /src/api
-        # command : [ "npm", "run", "start-email-queue" ]
-        # volumes:
-            # - .:/src
-        # env_file:
-            # - ./common.env
-        # depends_on:
-            # - postgres
-            # - redis
-            # - migrate-seed
-    postgres:
-        image: postgres:9.6.1
-        env_file:
-            - ./common.env
-    redis:
-        image: redis
-    migrate-seed:
-        build:
-            context: .
-            dockerfile: Dockerfile.node
-            args:
-                PACKAGE_PATH: ./api/package.json
-                WORKING_DIR: /src/api
-        env_file:
-            - ./common.env
-        volumes:
-            - .:/src
-        depends_on:
-            - postgres
-        entrypoint: ./wait-for-it.sh -t 0 postgres:5432 --
-        command: ["npm", "run", "migrate-seed"]
+  # example-frontend:
+    # build:
+      # context: .
+      # dockerfile: Dockerfile.node
+      # args:
+        # PACKAGE_PATH: ./admin-frontend/package.json
+        # WORKING_DIR: /src/admin-frontend
+    # environment:
+      # BACKEND: api:9000
+      # NODE_PATH: /src/admin-frontend/src
+    # env_file:
+      # - ./common.env
+    # volumes:
+      # - .:/src
+    # depends_on:
+      # - api
+    # command: ["npm", "start"]
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        PACKAGE_PATH: ./api/package.json
+        WORKING_DIR: /src/api
+    env_file:
+      - ./common.env
+    volumes:
+      - .:/src
+    depends_on:
+      - postgres
+      - redis
+      - migrate-seed
+    entrypoint: ./wait-for-it.sh -t 0 postgres:5432 --
+    command: ["npm", "start"]
+  # email-queue:
+    # image: template-api
+    # build:
+      # context: .
+      # dockerfile: Dockerfile.node
+      # args:
+        # PACKAGE_PATH: ./api/package.json
+        # WORKING_DIR: /src/api
+    # command: [ "npm", "run", "start-email-queue" ]
+    # volumes:
+      # - .:/src
+    # env_file:
+      # - ./common.env
+    # depends_on:
+      # - postgres
+      # - redis
+      # - migrate-seed
+  postgres:
+    image: postgres:9.6.1
+    env_file:
+      - ./common.env
+  redis:
+    image: redis
+  migrate-seed:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        PACKAGE_PATH: ./api/package.json
+        WORKING_DIR: /src/api
+    env_file:
+      - ./common.env
+    volumes:
+      - .:/src
+    depends_on:
+      - postgres
+    entrypoint: ./wait-for-it.sh -t 0 postgres:5432 --
+    command: ["npm", "run", "migrate-seed"]

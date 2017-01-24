@@ -1,4 +1,4 @@
-var ioc = require('electrolyte');
+const ioc = require('electrolyte');
 
 ioc.use(ioc.dir('src/application'));
 ioc.use(ioc.dir('src/bin'));

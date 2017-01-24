@@ -1,8 +1,8 @@
-var config = require('../../config');
-var knex = require('knex')({
-    debug      : process.env.DEBUG,
-    client     : 'pg',
-    connection : config('/dbConnection')
+const config = require('../../config');
+const knex = require('knex')({
+  debug: process.env.DEBUG,
+  client: 'pg',
+  connection: config('/dbConnection'),
 });
 
 module.exports = () => knex;

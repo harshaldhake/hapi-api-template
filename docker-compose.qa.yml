@@ -1,11 +1,11 @@
 version: '2'
 services:
-    search-frontend:
-        ports:
-            - 3000
-    admin-frontend:
-        ports:
-            - 3000
-    api:
-       ports:
-            - 9000
+  search-frontend:
+    ports:
+      - 3000
+  admin-frontend:
+    ports:
+      - 3000
+  api:
+     ports:
+      - 9000
