@@ -7,5 +7,6 @@ services:
     ports:
       - 3000
   api:
-     ports:
+    command: ['npm', 'run', 'start-qa']
+    ports:
       - 9000
