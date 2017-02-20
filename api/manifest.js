@@ -1,6 +1,5 @@
 const config = require('./config');
 const Boom = require('boom');
-
 module.exports = {
   server: {
     connections: {
@@ -47,5 +46,19 @@ module.exports = {
         options: config('/email'),
       },
     },
+    {
+      plugin: {
+        register: 'good',
+        options: {
+          reporters: {
+            consoleReporter: [
+              {module: 'good-squeeze', name: 'Squeeze', args: [{log: '*', response: '*', error: '*', request: '*'}]},
+              {module: 'good-console'},
+              'stdout'
+            ]
+          }
+        }
+      },
+    }
   ],
 };
