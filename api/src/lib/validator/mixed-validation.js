@@ -4,6 +4,7 @@ const Joi = require('joi');
 const mixedValidation = (joiSchema, customSchema) => {
   return (values, options, next) => {
     const schema = Joi.object().keys(joiSchema);
+    options.context.values = values;
 
     return Joi.validate(values, schema, options, (errors, value) => {
       if (errors && options.abortEarly) {
