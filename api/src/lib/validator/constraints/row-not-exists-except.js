@@ -12,7 +12,7 @@ module.exports = (bookshelf, ValidationError) => {
         var query = Model.where(where);
 
         const contextValue = get(options.context, contextValuePath);
-        if (contextValue) {
+        if (typeof contextValue === 'undefined') {
           query.where(exceptColumn, '!=', contextValue);
         }
 
