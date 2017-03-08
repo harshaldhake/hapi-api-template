@@ -7,14 +7,18 @@ RUN apt-get -yqq install curl git-core vim build-essential
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get -yqq install nodejs
 
+# Global install yarn package manager
+RUN apt-get update && apt-get install -y curl apt-transport-https && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn &&\
+    apt-get clean
+
 # contains app source
 ARG SRC_PATH
 
 # nginx site config file
 ARG NGINX_CONFIG=./frontend.conf
-
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
 
 ARG NODE_PATH=/src/src
 ENV NODE_PATH=${NODE_PATH}
@@ -25,9 +29,8 @@ ENV REACT_APP_ENV=${APP_ENV}
 # Create the build
 WORKDIR /src
 COPY ${SRC_PATH} .
-RUN npm install --only=dev
-RUN npm install
-RUN npm run build
+RUN yarn install --pure-lockfile
+RUN yarn build
 RUN mv ./build/* /usr/share/nginx/html
 RUN rm -rf /src/*
 
