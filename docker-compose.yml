@@ -32,6 +32,7 @@ services:
       - redis
       - migrate-seed
     entrypoint: ./wait-for-it.sh -t 0 postgres:5432 --
+    command: ["yarn", "start"]
   # email-queue:
     # image: template-api
     # build:
